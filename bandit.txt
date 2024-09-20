@@ -1,0 +1,105 @@
+Sam Ederington
+
+Level 0
+ssh -p 2220 bandit0@bandit.labs.overthewire.org               attempts to ssh into bandit0, shows ssh.
+password is bandit0
+
+Level 0->1
+ls             shows the documents in the directory, easy demonstration of ls
+cat readme             gives the password, shows how to use cat
+exit            leaves bandit0 so we can log into bandit1
+ssh -p 2220 bandit1@bandit.labs.overthewire.org              attempts to ssh into bandit1
+password is ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+
+Level 1->2
+ls       shows the file -
+cat ./-    prints out the content of the file -, necessary to include path so - isn't treated as an argument
+exit
+ssh -p 2220 bandit2@bandit.labs.overthewire.org
+password is 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+
+Level 2->3
+ls    shows the file "spaces in this filename"
+cat "spaces in this filename"      prints out the content of the file, necessary to put it in quotes to use whole name as an argument instead of 4 seperate ones
+exit
+ssh -p 2220 bandit3@bandit.labs.overthewire.org
+password is MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+
+Level 3->4
+cd inhere      move into the inhere directory
+ls -a        reveal all files, including normally hidden ones
+cat ...Hiding-From-You      prints out content of the file, periods make it hidden from normal ls
+exit
+ssh -p 2220 bandit4@bandit.labs.overthewire.org
+password is 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+
+Level 4->5
+ls        shows the directory inhere
+cd inhere      move into the directory inhere
+ls          show several files
+file ./*    shows the file type of every file in the current directory. Much cleaner than doing each individually.
+cat ./-file07      prints out the content of the file, starts with a - so necessary to incllude the path
+exit
+ssh -p 2220 bandit5@bandit.labs.overthewire.org
+password is 4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+
+Level 5->6
+ls
+cd inhere
+find -readable -size 1033c      finds the file specified by the website
+cat ./maybehere07/.file2
+exit
+ssh -p 2220 bandit6@bandit.labs.overthewire.org
+password is HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+
+Level 6->7
+cd ..      move to the home directory
+cd ..      move further back in the directories
+find -size 33c -user bandit7 -group bandit6 2>/dev/null          find the file matching website specifications without a whole lot of permission denied messages hiding it
+cat ./var/lib/dpkg/info/bandit7.password          prints out the found file
+exit
+ssh -p 2220 bandit7@bandit.labs.overthewire.org
+password is morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
+
+Level 7->8
+ls
+grep millionth data.txt          finds the line containing millionth in data.txt and prints it out
+exit
+ssh -p 2220 bandit8@bandit.labs.overthewire.org
+password is dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+
+Level 8->9
+ls
+sort data.txt | uniq -u          sorts the data.txt file, which moves all identical lines adjacent to each other. Pipes that to uniq -u, which prints out only the unique lines (no adjacent duplicates)
+exit
+ssh -p 2220 bandit9@bandit.labs.overthewire.org
+password is 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
+
+Level 9->10
+ls
+strings data.txt            prints out all strings in the file. Not very clean, but it works. Only one thing looks like a password from the printed information
+exit
+ssh -p 2220 bandit10@bandit.labs.overthewire.org
+password is FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
+
+Level 10->11
+ls
+base64 -d data.txt      prints out decoded base64 data
+exit
+ssh -p 2220 bandit11@bandit.labs.overthewire.org
+password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
+
+Level 11->12
+ls
+cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'      the wikipedia page helped immensely with figuring out how tr could be  used. cat pipes the data from the file, while tr turns A-Z into N-Z and the leftovers into A
+exit                                               M. same thing for the lowercase characters.
+ssh -p 2220 bandit12@bandit.labs.overthewire.org
+the password is 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
+
+Level 12->13
+ls
+mktemp -d        Provided command to make own working directory for this
+cp data.txt /tmp/tmp.SguUSuTGq3        copy data file into personal working directory
+cd /tmp/tmp.SguUSuTGq3        move into working directory
+xxd -r data.txt unhexed.gz        reverses the hexdump into a new gz file according to 
+
