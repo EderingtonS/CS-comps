@@ -101,5 +101,46 @@ ls
 mktemp -d        Provided command to make own working directory for this
 cp data.txt /tmp/tmp.SguUSuTGq3        copy data file into personal working directory
 cd /tmp/tmp.SguUSuTGq3        move into working directory
-xxd -r data.txt unhexed.gz        reverses the hexdump into a new gz file according to 
+xxd -r data.txt unhexed        reverses the hexdump into a new file
+file unhexed                  check compression type
+mv unhexed unhexed.gz          change file name to reflect compression type
+gzip -d unhexed.gz            undoes the gzip
+file unhexed                  check compression type
+mv unhexed unhexed.bz2        rename file appropriately
+bzip2 -d unhexed.bz2
+file unhexed
+mv unhexed unhexed.gz
+gzip -d unhexed.gz
+file unhexed                  check compression type
+mv unhexed unhexed.tar          rename file to reflect type
+tar -xf unhexed.tar            extract the tar compression
+ls
+file data5.bin                check type
+tar -xf data5.bin
+ls
+file data6.bin
+bzip2 -d data6.bin
+ls
+tar -xf data6.bin.out
+ls
+file data8.bin
+mv data8.bin data8.gz
+gzip -d data8.gz
+file data8                  CELEBRATE ITS ASCII
+cat data8                    CELEBRATE WE'RE DONE IT'S OVER
+exit
+ssh -p 2220 bandit13@bandit.labs.overthewire.org
+password is FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
+
+Level 13->14
+ls
+cat sshkey.private            Okay thats a lot
+ssh -i sshkey.private -p 2220 bandit14@localhost        log in from bandit 13 to 14 using the ssh key
+
+Level 14->15
+cat /etc/bandit_pass/bandit14                    retrieve the password for bandit14
+password is FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
+ls -a
+cd .ssh
+cat authorized_keys              seems like a good idea
 
